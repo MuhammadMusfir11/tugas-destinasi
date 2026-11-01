@@ -1,0 +1,240 @@
+@import "tailwindcss";
+
+@theme {
+  --color-deep: #10261C;
+  --color-forest: #284A35;
+  --color-moss: #617A5D;
+  --color-sage: #91A889;
+  --color-cream: #F3EFE4;
+  --color-sand: #D9CEB8;
+  --color-mist: #E8ECE3;
+  --color-warm-white: #FAF9F4;
+  --color-gold: #B89A62;
+  --color-olive: #7E8B52;
+  --color-black-forest: #08120D;
+
+  --font-display: "Newsreader", serif;
+  --font-sans: "Source Serif 4", sans-serif;
+
+  --ease-forest: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+body {
+  font-family: var(--font-sans);
+  background: #E2CFA3;
+  color: var(--color-ink);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection { background: var(--color-gold); color: var(--color-black-forest); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ---------- Animated background ---------- */
+@keyframes drift-a {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(8vw, 6vh, 0) scale(1.12); }
+}
+@keyframes drift-b {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1.05); }
+  50% { transform: translate3d(-9vw, 8vh, 0) scale(0.92); }
+}
+@keyframes drift-c {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(0.95); }
+  50% { transform: translate3d(6vw, -8vh, 0) scale(1.1); }
+}
+@keyframes ray-sway {
+  0%, 100% { opacity: 0.08; transform: rotate(var(--r)) translateX(0); }
+  50% { opacity: 0.2; transform: rotate(calc(var(--r) + 3deg)) translateX(3vw); }
+}
+@keyframes float-up {
+  0% { transform: translate3d(0, 0, 0); opacity: 0; }
+  15% { opacity: 0.55; }
+  100% { transform: translate3d(24px, -110vh, 0); opacity: 0; }
+}
+
+.bg-blob {
+  position: absolute;
+  border-radius: 9999px;
+  will-change: transform;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  pointer-events: none;
+  opacity: 0.07;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+@keyframes eq {
+  0%, 100% { transform: scaleY(0.3); }
+  50% { transform: scaleY(1); }
+}
+
+@keyframes scroll-line {
+  0%   { transform: scaleY(0); transform-origin: top; }
+  50%  { transform: scaleY(1); transform-origin: top; }
+  51%  { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.15; }
+  50% { opacity: 0.9; }
+}
+
+.no-scrollbar { scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+
+@keyframes aurora-a {
+  0%, 100% { transform: translate3d(-10%, 4%, 0) skewX(-14deg) scaleY(0.85); opacity: 0.35; }
+  50%      { transform: translate3d(12%, -4%, 0) skewX(12deg) scaleY(1.15); opacity: 1; }
+}
+@keyframes aurora-b {
+  0%, 100% { transform: translate3d(8%, 0, 0) skewX(10deg) scaleY(1.1); opacity: 0.9; }
+  50%      { transform: translate3d(-12%, 6%, 0) skewX(-12deg) scaleY(0.8); opacity: 0.3; }
+}
+@keyframes aurora-c {
+  0%, 100% { transform: translate3d(0, 0, 0) skewX(-6deg) scaleY(1); opacity: 0.5; }
+  33%      { transform: translate3d(-9%, -5%, 0) skewX(10deg) scaleY(1.2); opacity: 1; }
+  66%      { transform: translate3d(9%, 5%, 0) skewX(-12deg) scaleY(0.9); opacity: 0.35; }
+}
+
+@theme {
+  --color-paper: #E2CFA3;
+  --color-ink: #2B1D12;
+  --color-sepia: #6B4A2B;
+  --color-rust: #8C3B22;
+  --font-headline: "Newsreader", serif;
+  --font-news: "Source Serif 4", serif;
+}
+
+/* Kertas koran lawas */
+.paper {
+  background-color: #E2CFA3;
+  background-image:
+    radial-gradient(ellipse at 50% 35%, rgba(255, 243, 210, 0.55), transparent 62%),
+    radial-gradient(ellipse at 50% 50%, transparent 50%, rgba(107, 69, 39, 0.38) 100%);
+}
+.paper::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.16;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='p'><feTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.25 0 0 0 0 0.16 0 0 0 0 0.08 0 0 0 0.9 0'/></filter><rect width='100%' height='100%' filter='url(%23p)'/></svg>");
+}
+
+/* Bingkai tebal jadul (About) */
+.frame-vintage {
+  position: relative;
+  padding: 16px;
+  background: linear-gradient(135deg, #6b4527 0%, #3a2413 45%, #5a3a20 100%);
+  box-shadow:
+    0 0 0 1px #1f140c,
+    0 0 0 5px #b08a55,
+    0 0 0 6px #1f140c,
+    0 18px 34px rgba(43, 29, 18, 0.38);
+}
+.frame-vintage::before {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border: 1px solid rgba(214, 181, 125, 0.7);
+  pointer-events: none;
+}
+.frame-vintage::after {
+  content: '';
+  position: absolute;
+  inset: 12px;
+  border: 1px solid rgba(31, 20, 12, 0.9);
+  pointer-events: none;
+}
+
+/* Bingkai tipis melengkung (Destinasi) */
+.frame-thin {
+  position: relative;
+  padding: 9px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #6b4527 0%, #3a2413 45%, #5a3a20 100%);
+  box-shadow:
+    0 0 0 1px #1f140c,
+    0 0 0 3px #b08a55,
+    0 0 0 4px #1f140c,
+    0 12px 24px rgba(43, 29, 18, 0.3);
+}
+.frame-thin::before {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border: 1px solid rgba(214, 181, 125, 0.65);
+  border-radius: 7px;
+  pointer-events: none;
+}
+
+.news-cols { column-rule: 1px solid rgba(43, 29, 18, 0.3); }
+
+/* Foto digantung: bergoyang sangat pelan */
+@keyframes sway {
+  0%, 100% { rotate: var(--r); }
+  50% { rotate: calc(var(--r) + 1.4deg); }
+}
+.sway {
+  rotate: var(--r);
+  transform-origin: top center;
+  animation: sway 7s ease-in-out infinite;
+}
+
+/* Prangko: tepi bergerigi */
+.stamp {
+  --r: 5px;
+  --g: 16px;
+  -webkit-mask-image:
+    radial-gradient(circle at 50% 0, #0000 var(--r), #000 calc(var(--r) + 0.5px)),
+    radial-gradient(circle at 50% 100%, #0000 var(--r), #000 calc(var(--r) + 0.5px)),
+    radial-gradient(circle at 0 50%, #0000 var(--r), #000 calc(var(--r) + 0.5px)),
+    radial-gradient(circle at 100% 50%, #0000 var(--r), #000 calc(var(--r) + 0.5px));
+  -webkit-mask-size: var(--g) 100%, var(--g) 100%, 100% var(--g), 100% var(--g);
+  -webkit-mask-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+  -webkit-mask-position: center;
+  -webkit-mask-composite: source-in;
+  mask-image:
+    radial-gradient(circle at 50% 0, #0000 var(--r), #000 calc(var(--r) + 0.5px)),
+    radial-gradient(circle at 50% 100%, #0000 var(--r), #000 calc(var(--r) + 0.5px)),
+    radial-gradient(circle at 0 50%, #0000 var(--r), #000 calc(var(--r) + 0.5px)),
+    radial-gradient(circle at 100% 50%, #0000 var(--r), #000 calc(var(--r) + 0.5px));
+  mask-size: var(--g) 100%, var(--g) 100%, 100% var(--g), 100% var(--g);
+  mask-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+  mask-position: center;
+  mask-composite: intersect;
+}
+
+/* ---------- Mobile ---------- */
+html { -webkit-text-size-adjust: 100%; }
+h1, h2, h3 { text-wrap: balance; }
+p { text-wrap: pretty; }
+
+@media (max-width: 639px) {
+  section h2 {
+    font-size: clamp(1.55rem, 7.2vw, 2.4rem);
+    line-height: 1.04;
+  }
+  .vm-purpose { font-size: 8.6vw; }
+}
